@@ -1,9 +1,10 @@
 library(rvest)
 library(stringr)
 library(dplyr)
+library(stringr)
 
 read_file <- function(name_str, date_str) {
-  day_html = read_html(paste('data/', name_str, '/', date_str, '.html', sep = ""))
+  day_html = read_html(paste('data/', name_str, '/', date_str, sep = ""))
   day_html %>%
     html_nodes('tr') %>%
     html_nodes('td') %>%
@@ -32,7 +33,7 @@ read_file <- function(name_str, date_str) {
       find_lmb <- str_locate(title_str, "[0-9]{1,10} lmb")
       find_rmb <- str_locate(title_str, "[0-9]{1,10} rmb")
       find_scrollwheel <- str_locate(title_str, "[0-9]{1,10} scrollwheel")
-      day_data <- add_row(day_data, name = name_str, date = date_str, 
+      day_data <- add_row(day_data, name = name_str, date = substring(inner_file, 1, str_length(inner_file)-5), 
                           time = day_table[i], 
                           title = substr(title_str, 1, find_title[1, 1]-1),
                           parent = substr(title_str, find_title[1, 1]+3, find_parent[1, 1]),
