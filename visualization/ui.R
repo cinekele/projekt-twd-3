@@ -9,6 +9,7 @@
 
 library(shiny)
 library(DT)
+library(png)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -30,7 +31,10 @@ shinyUI(fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-            dataTableOutput("xd")
+            dataTableOutput("xd"),
+            plotOutput("plot_clicks"),
+            imageOutput("mouse"),
+            imageOutput("key", height = 100)
         )
     )
 ))
