@@ -16,13 +16,13 @@ shinyUI(fluidPage(
                         value=c(as.Date("2020-12-21"), as.Date("2020-12-22")),
                         timeFormat="%Y-%m-%d",
                         animate = TRUE),
-            imageOutput("mouse", height = 50),
-            imageOutput("key", height = 50)
+            imageOutput("mouse", height = 350),
+            imageOutput("key", height = 350)
         ),
 
         mainPanel(
             plotOutput("plot_clicks"),
-            plotOutput("application")
+            plotOutput("application", width = 900)
         )
     )
 ))
