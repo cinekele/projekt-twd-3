@@ -24,4 +24,4 @@ df$scrollwheel <- as.numeric(df$scrollwheel)
 df$time <- times(ifelse(stri_count_fixed(df$time, ":") == 2, df$time,
                   ifelse(stri_count_fixed(df$time, ":") == 1, 
                          stri_join("00:",df$time), stri_join("00:00:",df$time))))
-write_csv2(df, "data.csv")
+write_csv2(df, "./visualization/data.csv")
