@@ -16,8 +16,11 @@ shinyUI(fluidPage(
                         value=c(as.Date("2020-12-21"), as.Date("2020-12-22")),
                         timeFormat="%Y-%m-%d",
                         animate = TRUE),
-            imageOutput("mouse", height = 50),
-            imageOutput("key", height = 50)
+            fluidRow(
+                column(5,imageOutput("mouse", height = 150)),
+                column(5,imageOutput("key", height = 150))
+            )
+
         ),
 
         mainPanel(
