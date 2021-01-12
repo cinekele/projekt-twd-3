@@ -16,6 +16,7 @@ shinyUI(fluidPage(
                         value=c(as.Date("2020-12-21"), as.Date("2020-12-22")),
                         timeFormat="%Y-%m-%d",
                         animate = TRUE),
+
             fluidRow(
                 column(5,imageOutput("mouse", height = 150)),
                 column(5,imageOutput("key", height = 150))
@@ -25,7 +26,7 @@ shinyUI(fluidPage(
 
         mainPanel(
             plotOutput("plot_clicks"),
-            plotOutput("application")
+            plotOutput("application", width = 900)
         )
     )
 ))
