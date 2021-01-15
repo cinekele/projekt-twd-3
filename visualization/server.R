@@ -16,7 +16,8 @@ shinyServer(function(input, output) {
     
     filtered_data <- reactive({
         data %>% 
-            filter(between(date, input$DatesMerge[1], input$DatesMerge[2]))
+            filter(between(date, input$DatesMerge[1], input$DatesMerge[2])) %>%
+            mutate(duration = 60*hours(times(time)) + minutes(times(time)) + 1/60*seconds(times(time)))
     })
     
     output$application <- renderPlotly({
@@ -83,8 +84,10 @@ shinyServer(function(input, output) {
         d <- filtered_data() %>%
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
+            group_by(date, title) %>% 
+            summarise(duration = sum(duration)) %>%
             arrange(date)
-        plot_ly(d, x = ~date, y = ~time) %>%
+        plot_ly(d, x = ~date, y = ~duration) %>%
             add_trace(type = "scatter", mode = "markers+lines") %>%
             layout(title = list(text = application()), 
                    xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
