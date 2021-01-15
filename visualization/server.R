@@ -64,6 +64,7 @@ shinyServer(function(input, output) {
             replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0)) %>%
             group_by(date, title) %>% 
             summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel)) %>%
+            ungroup()%>%
             arrange(date)
         
         plot_ly(d, x = ~date, colors = c("Keys" = "blue",
@@ -86,6 +87,7 @@ shinyServer(function(input, output) {
             filter(title == application()) %>%
             group_by(date, title) %>% 
             summarise(duration = sum(duration)) %>%
+            ungroup()%>%
             arrange(date)
         plot_ly(d, x = ~date, y = ~duration) %>%
             add_trace(type = "scatter", mode = "markers+lines") %>%
