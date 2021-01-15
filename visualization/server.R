@@ -43,7 +43,7 @@ shinyServer(function(input, output) {
             #       axis.text.y  = element_blank(),
             #       plot.margin = margin(1, 1, 1, 4, "cm"))
             plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration, type = "bar", 
-                    orientation = 'h', source = "application") %>%
+                    orientation = 'h', source = "application", marker = list(color = "forestgreen")) %>%
                 layout(xaxis = list(title = "Time in minutes"),
                        yaxis = list(title = list(text = "Application", standoff = 0)))
         })
@@ -61,8 +61,10 @@ shinyServer(function(input, output) {
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
             replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0)) %>%
-            arrange(date)
-        plot_ly(d, x = ~date, colors = c("Keys" = "blue",
+            group_by(date, title) %>% 
+            summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel))
+        
+        plot_ly(d, x = ~reorder(date, date), colors = c("Keys" = "blue",
                                                         "LMB" = "red",
                                                         "RMB" = "green",
                                                         "Scroll" = "yellow")) %>%
