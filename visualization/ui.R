@@ -33,7 +33,8 @@ shinyUI(fluidPage(
 
         mainPanel(
             plotlyOutput("application", width = 900),
-            plotlyOutput("plot_clicks")
+            plotlyOutput("plot_clicks"),
+            plotlyOutput("app_activity")
         )
     )
 ))

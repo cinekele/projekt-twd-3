@@ -22,7 +22,7 @@ shinyServer(function(input, output) {
     output$application <- renderPlotly({
         if (is.null(input$nameButton)) return(NULL)
         filtered_data() %>%
-            filter(name == input$nameButton) %>%
+            filter(name %in%  input$nameButton) %>%
             left_join(icons, by = "title") %>%
             group_by(title) %>%
             arrange(date) %>%
@@ -58,10 +58,11 @@ shinyServer(function(input, output) {
         if (is.null(application())) return(NULL)
         if (is.null(input$nameButton)) return(NULL)
         d <- filtered_data() %>%
-            filter(name == input$nameButton) %>%
+            filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
-            replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0))
-        plot_ly(d, x = ~reorder(date, date), colors = c("Keys" = "blue",
+            replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0)) %>%
+            arrange(date)
+        plot_ly(d, x = ~date, colors = c("Keys" = "blue",
                                                         "LMB" = "red",
                                                         "RMB" = "green",
                                                         "Scroll" = "yellow")) %>%
@@ -72,6 +73,17 @@ shinyServer(function(input, output) {
             layout(title = list(text = application()))
             # scale_x_date(date_breaks = "days", date_labels = "%d %b") %>%
             # ylim(0,NA)
+    })
+    
+    output$app_activity <- renderPlotly({
+        if (is.null(application())) return(NULL)
+        if (is.null(input$nameButton)) return(NULL)
+        d <- filtered_data() %>%
+            filter(name %in% input$nameButton) %>%
+            filter(title == application()) %>%
+            arrange(date)
+        plot_ly(d, x = ~date, y = ~time) %>%
+            add_trace(type = "scatter", mode = "markers+lines")
     })
 
     output$mouse <- renderImage({
