@@ -32,21 +32,11 @@ shinyServer(function(input, output) {
             distinct() %>%
             arrange(desc(sum_duration)) %>%
             head(10) %>%
-            # ggplot(aes(x =  reorder(title, -sum_duration), y = sum_duration)) +
-            # geom_col() +
-            # geom_image(aes(x = title, image = image), y = -3,
-            #            size = 0.17, hjust = 1, inherit.aes = FALSE) +
-            # coord_flip(clip = "off", expand = FALSE) + 
-            # labs(x = "") +
-            # theme_classic() +
-            # theme(plot.title = element_text(hjust = 0, size = 26),
-            #       axis.ticks.y = element_blank(),
-            #       axis.text.y  = element_blank(),
-            #       plot.margin = margin(1, 1, 1, 4, "cm"))
             plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration/60, type = "bar", 
                     orientation = 'h', source = "application", marker = list(color = "forestgreen")) %>%
                 layout(xaxis = list(title = "Time in hours"),
-                       yaxis = list(title = list(text = "Application", standoff = 0)))
+                       yaxis = list(title = list(text = "Application", standoff = 0)),
+                       margin = list(l=350))
         })
     
     application <- reactiveVal()
@@ -62,7 +52,7 @@ shinyServer(function(input, output) {
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
             replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0)) %>%
-            group_by(date, title) %>% 
+            group_by(date, title) %>%
             summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel)) %>%
             ungroup()%>%
             arrange(date)
@@ -85,7 +75,7 @@ shinyServer(function(input, output) {
         d <- filtered_data() %>%
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
-            group_by(date, title) %>% 
+            group_by(date, title) %>%
             summarise(duration = sum(duration)) %>%
             ungroup()%>%
             arrange(date)
