@@ -35,7 +35,7 @@ shinyUI(fluidPage(
         ),
 
         mainPanel(
-            plotlyOutput("application", width = 900, height = 500),
+            plotlyOutput("application", height = 500),
             plotlyOutput("app_activity"),
             width = 6
         )
