@@ -62,19 +62,19 @@ shinyServer(function(input, output) {
             filter(title == application()) %>%
             replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0)) %>%
             group_by(date, title) %>% 
-            summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel))
+            summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel)) %>%
+            arrange(date)
         
-        plot_ly(d, x = ~reorder(date, date), colors = c("Keys" = "blue",
-                                                        "LMB" = "red",
-                                                        "RMB" = "green",
-                                                        "Scroll" = "yellow")) %>%
+        plot_ly(d, x = ~date, colors = c("Keys" = "blue",
+                                         "LMB" = "red",
+                                         "RMB" = "green",
+                                         "Scroll" = "yellow")) %>%
             add_trace(y = ~keys, type = "scatter", mode = "markers+lines", color = "Keys") %>%
             add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
             add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
             add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
-            layout(title = list(text = application()))
-            # scale_x_date(date_breaks = "days", date_labels = "%d %b") %>%
-            # ylim(0,NA)
+            layout(title = list(text = application()), 
+                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
     })
     
     output$app_activity <- renderPlotly({
@@ -85,7 +85,9 @@ shinyServer(function(input, output) {
             filter(title == application()) %>%
             arrange(date)
         plot_ly(d, x = ~date, y = ~time) %>%
-            add_trace(type = "scatter", mode = "markers+lines")
+            add_trace(type = "scatter", mode = "markers+lines") %>%
+            layout(title = list(text = application()), 
+                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
     })
 
     output$mouse <- renderImage({
