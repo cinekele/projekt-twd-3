@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
             transmute(sum_duration = sum(duration), image) %>%
             distinct() %>%
             arrange(desc(sum_duration)) %>%
-            head(5) %>%
+            head(10) %>%
             # ggplot(aes(x =  reorder(title, -sum_duration), y = sum_duration)) +
             # geom_col() +
             # geom_image(aes(x = title, image = image), y = -3,
