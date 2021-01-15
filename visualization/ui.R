@@ -26,16 +26,18 @@ shinyUI(fluidPage(
             ),
 
             fluidRow(
-                column(5,imageOutput("mouse", height = 150)),
-                column(5,imageOutput("key", height = 150))
-            )
+                column(6, align="center", imageOutput("mouse", height = 350)),
+                column(6, align="center", imageOutput("key", height = 350))
+            ),
+            plotlyOutput("plot_clicks"),
+            width = 6
 
         ),
 
         mainPanel(
-            plotlyOutput("application", width = 900),
+            plotlyOutput("application", width = 900, height = 500),
             plotlyOutput("app_activity"),
-            plotlyOutput("plot_clicks")
+            width = 6
         )
     )
 ))
