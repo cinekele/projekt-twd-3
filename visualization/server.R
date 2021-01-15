@@ -20,8 +20,9 @@ shinyServer(function(input, output) {
     })
     
     output$application <- renderPlotly({
+        if (is.null(input$nameButton)) return(NULL)
         filtered_data() %>%
-            filter(name == "Adam") %>%
+            filter(name == input$nameButton) %>%
             left_join(icons, by = "title") %>%
             group_by(title) %>%
             arrange(date) %>%
@@ -55,8 +56,9 @@ shinyServer(function(input, output) {
     
     output$plot_clicks <- renderPlotly({
         if (is.null(application())) return(NULL)
+        if (is.null(input$nameButton)) return(NULL)
         d <- filtered_data() %>%
-            filter(name == "Adam") %>%
+            filter(name == input$nameButton) %>%
             filter(title == application()) %>%
             replace_na(list(keys = 0, lmb = 0, rmb = 0, scrollwheel=0))
         plot_ly(d, x = ~reorder(date, date), colors = c("Keys" = "blue",

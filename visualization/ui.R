@@ -18,10 +18,10 @@ shinyUI(fluidPage(
                         timeFormat="%Y-%m-%d",
                         animate = TRUE),
             checkboxGroupButtons(
-                inputId = "somevalue", label = "Osoby :",
-                choices = c("Adam", "Paweł", "Piotr"),
+                inputId = "nameButton", label = "Osoby :",
+                choices = c("Adam", "Pawel", "Piotr"),
                 justified = TRUE, status = "primary",
-                checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon"))
+                checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),
             ),
 
             fluidRow(
