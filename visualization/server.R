@@ -42,9 +42,9 @@ shinyServer(function(input, output) {
             #       axis.ticks.y = element_blank(),
             #       axis.text.y  = element_blank(),
             #       plot.margin = margin(1, 1, 1, 4, "cm"))
-            plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration, type = "bar", 
+            plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration/60, type = "bar", 
                     orientation = 'h', source = "application", marker = list(color = "forestgreen")) %>%
-                layout(xaxis = list(title = "Time in minutes"),
+                layout(xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0)))
         })
     
