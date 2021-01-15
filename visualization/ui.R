@@ -22,7 +22,7 @@ shinyUI(fluidPage(
                 choices = c("Adam", "Pawel", "Piotr"),
                 justified = TRUE, status = "primary",
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),
-                selected = "Adam",
+                selected = c("Adam", "Pawel", "Piotr"),
             ),
 
             fluidRow(

@@ -83,7 +83,9 @@ shinyServer(function(input, output) {
         d <- filtered_data() %>%
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
-            arrange(date)
+            arrange(date) %>%
+            group_by(date, title) %>% 
+            summarise(time = sum(time))
         plot_ly(d, x = ~date, y = ~time) %>%
             add_trace(type = "scatter", mode = "markers+lines")
     })
