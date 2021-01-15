@@ -45,7 +45,7 @@ shinyServer(function(input, output) {
             #       plot.margin = margin(1, 1, 1, 4, "cm"))
             plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration/60, type = "bar", 
                     orientation = 'h', source = "application", marker = list(color = "forestgreen")) %>%
-                layout(xaxis = list(title = "Time in hours"),
+                layout(xaxis = list(title = "Hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0)))
         })
     
@@ -88,11 +88,13 @@ shinyServer(function(input, output) {
             group_by(date, title) %>% 
             summarise(duration = sum(duration)) %>%
             ungroup()%>%
+            mutate(duration = duration/60) %>%
             arrange(date)
         plot_ly(d, x = ~date, y = ~duration) %>%
             add_trace(type = "scatter", mode = "markers+lines") %>%
             layout(title = list(text = application()), 
-                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
+                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
+                   yaxis = list(type = "hours"))
     })
 
     output$mouse <- renderImage({
