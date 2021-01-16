@@ -6,7 +6,7 @@ library(plotly)
 
 shinyUI(fluidPage(
 
-    titlePanel("My"),
+    titlePanel("Our usage of PCs"),
 
     fluidRow(
         column(
@@ -19,7 +19,7 @@ shinyUI(fluidPage(
                         animate = TRUE,
                         width = 900),
             checkboxGroupButtons(
-                inputId = "nameButton", label = "Osoby :",
+                inputId = "nameButton", label = "People: ",
                 choiceNames = c(HTML("<p style=\"color:black;font-size:20px;background-color:#E69F00\">Adam</p>"),
                                 HTML("<p style=\"color:black;font-size:20px;background-color:#009E73\">Paweł</p>"),
                                 HTML("<p style=\"color:black;font-size:20px;background-color:#56B4E9\">Piotr</p>")),
