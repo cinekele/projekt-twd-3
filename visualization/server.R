@@ -66,13 +66,23 @@ shinyServer(function(input, output) {
         if (filtr_keys() != "all")
           color <- ifelse(names(color) == filtr_keys(), color, "gray")
         
-        plot_ly(d, x = ~date, colors = color) %>%
-            add_trace(y = ~keys, type = "scatter", mode = "markers+lines", color = "Keys") %>%
-            add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
-            add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
-            add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
-            layout(title = list(text = application()), 
-                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
+        if(input$DatesMerge[1] != input$DatesMerge[2])
+            plot_ly(d, x = ~date, colors = color) %>%
+                add_trace(y = ~keys, type = "scatter", mode = "markers+lines", color = "Keys") %>%
+                add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
+                add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
+                add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
+                layout(title = list(text = application()), 
+                       xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
+        else
+            plot_ly() %>%
+            add_bars(
+                x = c("keys","lmb","rmb","scrollwheel"),
+                y = c(d$keys, d$lmb, d$rmb, d$scrollwheel),
+                base = 0,
+                marker = list(
+                    color = c('blue','red','green','yellow')
+                ))
     })
     
     output$app_activity <- renderPlotly({
@@ -86,11 +96,21 @@ shinyServer(function(input, output) {
             ungroup()%>%
             mutate(duration = duration/60) %>%
             arrange(date)
-        plot_ly(d, x = ~date, y = ~duration) %>%
-            add_trace(type = "scatter", mode = "markers+lines") %>%
-            layout(title = list(text = application()), 
+        if(input$DatesMerge[1] != input$DatesMerge[2])
+            plot_ly(d, x = ~date, y = ~duration) %>%
+                add_trace(type = "scatter", mode = "markers+lines") %>%
+                layout(title = list(text = application()), 
                    xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
                    yaxis = list(type = "hours"))
+        else
+            plot_ly() %>%
+            add_bars(
+                x = c(application()),
+                y = c(d$duration),
+                base = 0,
+                marker = list(
+                    color = 'blue'
+                ))
     })
     
     filtr_keys <- reactiveVal("all")
