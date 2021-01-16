@@ -8,12 +8,6 @@ library(sp)
 
 shinyServer(function(input, output) {
     data <- read_csv2("data.csv")
-    icons <- data.frame(title = c("chrome"),
-                        image = c("icons/chrome.png"))
-    
-    #output$xd <- renderDataTable({
-    #filtered_data()
-    #})
     
     filtered_data <- reactive({
         data %>% 
@@ -25,7 +19,6 @@ shinyServer(function(input, output) {
         if (is.null(input$nameButton)) return(NULL)
       order <-filtered_data() %>%
         filter(name %in% input$nameButton) %>%
-        mutate(duration = 60*hours(times(time)) + minutes(times(time)) + 1/60*seconds(times(time))) %>%
         group_by(title) %>%
         summarise(sum_duration = sum(duration)) %>%
         arrange(desc(sum_duration)) %>%
@@ -114,7 +107,7 @@ shinyServer(function(input, output) {
     
     filtr_keys <- reactiveVal("all")
     
-    observeEvent(input$mouse_hover, {
+    observeEvent(input$mouse_click, {
         mwheel <- data.frame(x = c(65.95, 84.95, 84.95, 65.95), 
                                 y = c(84.60001, 84.60001, 140.6, 140.6))
         lmb <- data.frame(x = c(69.95, 38.95, 28.95, 10.95, 5.949997,
@@ -129,16 +122,16 @@ shinyServer(function(input, output) {
                              y = c(68.60001, 70.60001, 82.60001, 98.60001,117.6,
                                    122.6,156.6, 156.6, 147.6, 138.6,129.6,
                                    88.6,76.6, 66.6, 68.60001))
-        if(point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, mwheel$x, mwheel$y) == 1)
+        if(point.in.polygon(input$mouse_click$x, input$mouse_click$y, mwheel$x, mwheel$y) == 1)
           ifelse(filtr_keys() == "Scroll", filtr_keys("all"), filtr_keys("Scroll"))
-        else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, lmb$x, lmb$y) == 1)
+        else if (point.in.polygon(input$mouse_click$x, input$mouse_click$y, lmb$x, lmb$y) == 1)
           ifelse(filtr_keys() == "LMB", filtr_keys("all"), filtr_keys("LMB"))
-        else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, rmb$x, rmb$y) == 1)
+        else if (point.in.polygon(input$mouse_click$x, input$mouse_click$y, rmb$x, rmb$y) == 1)
           ifelse(filtr_keys() == "RMB", filtr_keys("all"), filtr_keys("RMB"))
     })
     
-    observeEvent(input$key_hover, {
-      if (!is.null(input$key_hover))
+    observeEvent(input$key_click, {
+      if (!is.null(input$key_click))
         ifelse(filtr_keys() == "Keys", filtr_keys("all"), filtr_keys("Keys"))
     })
     
