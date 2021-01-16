@@ -78,7 +78,7 @@ shinyServer(function(input, output) {
                 add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
                 add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
                 layout(title = list(text = paste0("Clicks in: \"", application(), "\" over time")), 
-                       xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
+                       xaxis = list(title = "", type = "date", tickformat = "%d/%m<br>(%a)"),
                        yaxis = list(title = "Number of clicks"))
         else if(nrow(d) == 1)
             plot_ly() %>%
@@ -106,7 +106,7 @@ shinyServer(function(input, output) {
     plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name, 
             colors = person_color) %>% 
         layout(title = list(text = paste0("Activity in: \"", application(), "\" over time")), 
-               xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
+               xaxis = list(title = "", type = "date", tickformat = "%d/%m<br>(%a)"),
                yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
                showlegend = TRUE)
