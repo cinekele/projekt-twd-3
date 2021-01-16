@@ -108,7 +108,7 @@ shinyServer(function(input, output) {
                xaxis = list(title = "Date", type = "date", tickformat = "%d %b (%a)<br>%Y"),
                yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
-               showlegend = FALSE)
+               showlegend = TRUE)
     })
     
     filtr_keys <- reactiveVal("all")
