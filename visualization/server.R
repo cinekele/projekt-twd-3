@@ -91,7 +91,9 @@ shinyServer(function(input, output) {
                 base = 0,
                 marker = list(
                     color = c('blue','red','green','yellow')
-                ))
+                )) %>%
+          layout(title = list(text = application()), 
+                 xaxis = list(type = ""))
     })
     
     output$app_activity <- renderPlotly({
