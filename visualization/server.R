@@ -8,7 +8,7 @@ library(sp)
 
 shinyServer(function(input, output) {
     data <- read_csv2("data.csv")
-    person_color <- c("Adam" = "#E69F00", "Pawel" = "#009E73", "Piotr" = "#56B4E9")
+    person_color <- c("Adam" = "#E69F00", "Pawel" = "#009E73", "Piotr" = "#CC79A7")
     
     filtered_data <- reactive({
         data %>% 
