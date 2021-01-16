@@ -37,13 +37,14 @@ shinyServer(function(input, output) {
           filter(title %in% order$title) %>%
           group_by(title, name) %>%
           summarise(sum_duration = sum(duration)) %>%
-            plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name,
+            plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name, 
+                    colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen"),
                     orientation = 'h', source = "application") %>%
                 layout(xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
                                     categoryorder = "array",
                                     categoryarray = rev(order$title)),
-                       margin = list(l=350), 
+                       margin = list(l=250), 
                        barmode = 'stack',
                        showlegend = TRUE)
         })
@@ -102,7 +103,8 @@ shinyServer(function(input, output) {
             mutate(duration = duration/60) %>%
             arrange(date)
     
-    plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name) %>% 
+    plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name, 
+            colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen")) %>% 
         layout(title = list(text = application()), 
                xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
                yaxis = list(type = "hours"), 
