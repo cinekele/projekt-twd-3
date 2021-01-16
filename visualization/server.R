@@ -40,7 +40,8 @@ shinyServer(function(input, output) {
                                     categoryarray = rev(order$title)),
                        margin = list(l=250), 
                        barmode = 'stack',
-                       showlegend = TRUE)
+                       showlegend = TRUE,
+                       legend = list(x = 0.8, y = 0))
         })
     
     application <- reactiveVal("chrome")
@@ -107,7 +108,7 @@ shinyServer(function(input, output) {
                xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
                yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
-               showlegend = TRUE)
+               showlegend = FALSE)
     })
     
     filtr_keys <- reactiveVal("all")
