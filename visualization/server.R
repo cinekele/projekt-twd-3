@@ -57,12 +57,16 @@ shinyServer(function(input, output) {
             summarise(keys = sum(keys), lmb = sum(lmb), rmb = sum(rmb), scrollwheel = sum(scrollwheel)) %>%
             ungroup()%>%
             arrange(date)
+          
+        color <-  c("Keys" = "blue",
+                    "LMB" = "red",
+                    "RMB" = "green",
+                    "Scroll" = "yellow")
         
-  
-        plot_ly(d, x = ~date, colors = c("Keys" = "blue",
-                                         "LMB" = "red",
-                                         "RMB" = "green",
-                                         "Scroll" = "yellow")) %>%
+        if (filtr_keys() != "all")
+          color <- ifelse(names(color) == filtr_keys(), color, "gray")
+        
+        plot_ly(d, x = ~date, colors = color) %>%
             add_trace(y = ~keys, type = "scatter", mode = "markers+lines", color = "Keys") %>%
             add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
             add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
@@ -107,16 +111,16 @@ shinyServer(function(input, output) {
                                    122.6,156.6, 156.6, 147.6, 138.6,129.6,
                                    88.6,76.6, 66.6, 68.60001))
         if(point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, mwheel$x, mwheel$y) == 1)
-          filtr_keys("mwhell")
+          filtr_keys("Scroll")
         else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, lmb$x, lmb$y) == 1)
-          filtr_keys("lmb")
+          filtr_keys("LMB")
         else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, rmb$x, rmb$y) == 1)
-          filtr_keys("rmb")
+          filtr_keys("RMB")
     })
     
     observeEvent(input$key_hover, {
       if (!is.null(input$key_hover))
-        filtr_keys("key")
+        filtr_keys("Keys")
     })
     
     output$mouse_info <- renderPrint({
