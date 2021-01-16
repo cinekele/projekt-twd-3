@@ -34,7 +34,7 @@ shinyServer(function(input, output) {
             plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name, 
                     colors = person_color,
                     orientation = 'h', source = "application") %>%
-                layout(title = list(text = "Applications usage:"), 
+                layout(title = list(text = "Applications usage:            Click the bars!"), 
                        xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
                                     categoryorder = "array",

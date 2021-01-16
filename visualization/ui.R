@@ -38,8 +38,11 @@ shinyUI(fluidPage(
 
             fluidRow(
                 column(6, align="center", imageOutput("mouse", height = 350, click = "mouse_click")),
-                column(6, align="center", imageOutput("key", height = 350, click = "key_click"))
+                column(6, align="center", "Click me!",imageOutput("key", height = 350, click = "key_click")),
+                
             ),
+            
+            
             width = 6
 
         )
