@@ -20,7 +20,7 @@ shinyUI(fluidPage(
                         "Dates:",
                         min = as.Date("2020-12-20","%Y-%m-%d"),
                         max = as.Date("2021-01-15","%Y-%m-%d"),
-                        value=c(as.Date("2020-12-21"), as.Date("2021-01-10")),
+                        value=c(as.Date("2020-12-20"), as.Date("2021-01-15")),
                         timeFormat="%Y-%m-%d",
                         animate = TRUE,
                         width = 900),
