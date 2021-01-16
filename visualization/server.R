@@ -8,6 +8,7 @@ library(sp)
 
 shinyServer(function(input, output) {
     data <- read_csv2("data.csv")
+    person_color <- c("Adam" = "#E69F00", "Pawel" = "#009E73", "Piotr" = "#56B4E9")
     
     filtered_data <- reactive({
         data %>% 
@@ -31,7 +32,7 @@ shinyServer(function(input, output) {
           group_by(title, name) %>%
           summarise(sum_duration = sum(duration)) %>%
             plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name, 
-                    colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen"),
+                    colors = person_color,
                     orientation = 'h', source = "application") %>%
                 layout(xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
@@ -75,8 +76,9 @@ shinyServer(function(input, output) {
                 add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
                 add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
                 layout(title = list(text = application()), 
-                       xaxis = list(type = "date", tickformat = "%d/%m<br>(%a)"))
-        else
+                       xaxis = list(title = "Date", type = "date", tickformat = "%d %b (%a)<br>%Y"),
+                       yaxis = list(title = "Number of clicks"))
+        else if(nrow(d) == 1)
             plot_ly() %>%
             add_bars(
                 x = c("keys","lmb","rmb","scrollwheel"),
@@ -85,8 +87,9 @@ shinyServer(function(input, output) {
                 marker = list(
                     color = c('blue','red','green','yellow')
                 )) %>%
-          layout(title = list(text = application()), 
-                 xaxis = list(type = ""))
+            layout(title = list(text = application()), yaxis = list(title = "Number of clicks"))
+        else
+            return(NULL)
     })
     
     output$app_activity <- renderPlotly({
@@ -99,10 +102,10 @@ shinyServer(function(input, output) {
             arrange(date)
     
     plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name, 
-            colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen")) %>% 
+            colors = person_color) %>% 
         layout(title = list(text = application()), 
-               xaxis = list(type = "date", tickformat = "%d/%m<br>(%a)"),
-               yaxis = list(type = "hours"), 
+               xaxis = list(title = "Date", type = "date", tickformat = "%d %b (%a)<br>%Y"),
+               yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
                showlegend = TRUE)
     })

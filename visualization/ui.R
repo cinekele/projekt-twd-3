@@ -6,7 +6,7 @@ library(plotly)
 
 shinyUI(fluidPage(
 
-    titlePanel("My"),
+    titlePanel("Our usage of PCs"),
 
     fluidRow(
         column(
@@ -19,21 +19,21 @@ shinyUI(fluidPage(
                         animate = TRUE,
                         width = 900),
             checkboxGroupButtons(
-                inputId = "nameButton", label = "Osoby :",
-                choiceNames = c(HTML("<p style=\"color:black;font-size:20px;background-color:blue\">Adam</p>"),
-                                HTML("<p style=\"color:black;font-size:20px;background-color:brown\">Paweł</p>"),
-                                HTML("<p style=\"color:black;font-size:20px;background-color:green\">Piotr</p>")),
+                inputId = "nameButton", label = "People: ",
+                choiceNames = c(HTML("<p style=\"color:black;font-size:20px;background-color:#E69F00\">Adam</p>"),
+                                HTML("<p style=\"color:black;font-size:20px;background-color:#009E73\">Paweł</p>"),
+                                HTML("<p style=\"color:black;font-size:20px;background-color:#56B4E9\">Piotr</p>")),
                 choiceValues = c("Adam", "Pawel", "Piotr"),
                 justified = TRUE, status = "primary",
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),
                 selected = c("Adam", "Pawel", "Piotr"),
             ),
+            plotlyOutput("plot_clicks"),
 
             fluidRow(
                 column(6, align="center", imageOutput("mouse", height = 350, click = "mouse_click")),
                 column(6, align="center", imageOutput("key", height = 350, click = "key_click"))
             ),
-            plotlyOutput("plot_clicks"),
             width = 6
 
         ),
