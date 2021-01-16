@@ -77,7 +77,7 @@ shinyServer(function(input, output) {
                 add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
                 layout(title = list(text = application()), 
                        xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"))
-        else
+        else if(nrow(d) == 1)
             plot_ly() %>%
             add_bars(
                 x = c("keys","lmb","rmb","scrollwheel"),
@@ -86,6 +86,8 @@ shinyServer(function(input, output) {
                 marker = list(
                     color = c('blue','red','green','yellow')
                 ))
+        else
+            return(NULL)
     })
     
     output$app_activity <- renderPlotly({
