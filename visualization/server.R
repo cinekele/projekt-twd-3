@@ -62,10 +62,10 @@ shinyServer(function(input, output) {
             ungroup()%>%
             arrange(date)
           
-        color <-  c("Keys" = "blue",
-                    "LMB" = "red",
-                    "RMB" = "green",
-                    "Scroll" = "yellow")
+        color <-  c("Keys" = "#003f5c",
+                    "LMB" = "#7a5195",
+                    "RMB" = "#ef5675",
+                    "Scroll" = "#ffa600")
         
         if (filtr_keys() != "all")
           color <- ifelse(names(color) == filtr_keys(), color, "gray")
@@ -108,7 +108,7 @@ shinyServer(function(input, output) {
                xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
                yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
-               showlegend = FALSE)
+               showlegend = TRUE)
     })
     
     filtr_keys <- reactiveVal("all")
