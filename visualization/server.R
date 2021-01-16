@@ -23,21 +23,28 @@ shinyServer(function(input, output) {
     
     output$application <- renderPlotly({
         if (is.null(input$nameButton)) return(NULL)
+      order <-filtered_data() %>%
+        filter(name %in% input$nameButton) %>%
+        mutate(duration = 60*hours(times(time)) + minutes(times(time)) + 1/60*seconds(times(time))) %>%
+        group_by(title) %>%
+        summarise(sum_duration = sum(duration)) %>%
+        arrange(desc(sum_duration)) %>%
+        ungroup() %>%
+        head(10)
+      
         filtered_data() %>%
             filter(name %in%  input$nameButton) %>%
-            left_join(icons, by = "title") %>%
-            group_by(title) %>%
-            arrange(date) %>%
+          filter(title %in% order$title) %>%
             mutate(duration = 60*hours(times(time)) + minutes(times(time)) + 1/60*seconds(times(time))) %>%
-            transmute(sum_duration = sum(duration), image) %>%
-            distinct() %>%
-            arrange(desc(sum_duration)) %>%
-            head(10) %>%
-            plot_ly(y = ~reorder(title, sum_duration), x = ~sum_duration/60, type = "bar", 
-                    orientation = 'h', source = "application", marker = list(color = "forestgreen")) %>%
+            plot_ly(y = ~title, x = ~duration/60, type = "bar", color = ~name,
+                    orientation = 'h', source = "application") %>%
                 layout(xaxis = list(title = "Time in hours"),
-                       yaxis = list(title = list(text = "Application", standoff = 0)),
-                       margin = list(l=350))
+                       yaxis = list(title = list(text = "Application", standoff = 0), 
+                                    categoryorder = "array",
+                                    categoryarray = rev(order$title)),
+                       margin = list(l=350), 
+                       barmode = 'stack',
+                       showlegend = TRUE)
         })
     
     application <- reactiveVal("chrome")
@@ -66,7 +73,7 @@ shinyServer(function(input, output) {
         if (filtr_keys() != "all")
           color <- ifelse(names(color) == filtr_keys(), color, "gray")
         
-        if(input$DatesMerge[1] != input$DatesMerge[2])
+        if(nrow(d)>1)
             plot_ly(d, x = ~date, colors = color) %>%
                 add_trace(y = ~keys, type = "scatter", mode = "markers+lines", color = "Keys") %>%
                 add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
@@ -98,7 +105,8 @@ shinyServer(function(input, output) {
         layout(title = list(text = application()), 
                xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
                yaxis = list(type = "hours"), 
-               barmode = 'stack')
+               barmode = 'stack',
+               showlegend = TRUE)
     })
     
     filtr_keys <- reactiveVal("all")
