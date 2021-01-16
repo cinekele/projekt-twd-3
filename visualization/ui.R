@@ -20,7 +20,10 @@ shinyUI(fluidPage(
                         width = 900),
             checkboxGroupButtons(
                 inputId = "nameButton", label = "Osoby :",
-                choices = c("Adam", "Pawel", "Piotr"),
+                choiceNames = c(HTML("<p style=\"color:blue\">Adam</p>"),
+                                HTML("<p style=\"color:green\">Paweł</p>"),
+                                HTML("<p style=\"color:red\">Piotr</p>")),
+                choiceValues = c("Adam", "Pawel", "Piotr"),
                 justified = TRUE, status = "primary",
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),
                 selected = c("Adam", "Pawel", "Piotr"),
@@ -38,7 +41,6 @@ shinyUI(fluidPage(
         column(
             plotlyOutput("application", height = 500),
             plotlyOutput("app_activity"),
-            verbatimTextOutput("mouse_info"),
             width = 6
         )
     )
