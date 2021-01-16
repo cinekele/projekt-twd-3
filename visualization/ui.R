@@ -9,6 +9,12 @@ shinyUI(fluidPage(
     titlePanel("Our usage of PCs"),
 
     fluidRow(
+        
+        column(
+            plotlyOutput("application", height = 500),
+            plotlyOutput("app_activity"),
+            width = 6
+        ),
         column(
             sliderInput("DatesMerge",
                         "Dates:",
@@ -36,12 +42,7 @@ shinyUI(fluidPage(
             ),
             width = 6
 
-        ),
-
-        column(
-            plotlyOutput("application", height = 500),
-            plotlyOutput("app_activity"),
-            width = 6
         )
+
     )
 ))
