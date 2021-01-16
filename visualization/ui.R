@@ -5,8 +5,8 @@ library(png)
 library(plotly)
 
 shinyUI(fluidPage(
-
-    titlePanel("Our usage of PCs"),
+    
+    titlePanel(h1("Our usage of PCs", align = "center")),
 
     fluidRow(
         
@@ -17,7 +17,7 @@ shinyUI(fluidPage(
         ),
         column(
             sliderInput("DatesMerge",
-                        "Dates:",
+                        "Time range:",
                         min = as.Date("2020-12-20","%Y-%m-%d"),
                         max = as.Date("2021-01-15","%Y-%m-%d"),
                         value=c(as.Date("2020-12-20"), as.Date("2021-01-15")),
