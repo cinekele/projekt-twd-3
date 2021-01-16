@@ -91,26 +91,14 @@ shinyServer(function(input, output) {
         d <- filtered_data() %>%
             filter(name %in% input$nameButton) %>%
             filter(title == application()) %>%
-            group_by(date, title) %>%
-            summarise(duration = sum(duration)) %>%
-            ungroup()%>%
             mutate(duration = duration/60) %>%
             arrange(date)
-        if(input$DatesMerge[1] != input$DatesMerge[2])
-            plot_ly(d, x = ~date, y = ~duration) %>%
-                add_trace(type = "scatter", mode = "markers+lines") %>%
-                layout(title = list(text = application()), 
-                   xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
-                   yaxis = list(type = "hours"))
-        else
-            plot_ly() %>%
-            add_bars(
-                x = c(application()),
-                y = c(d$duration),
-                base = 0,
-                marker = list(
-                    color = 'blue'
-                ))
+    
+    plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name) %>% 
+        layout(title = list(text = application()), 
+               xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
+               yaxis = list(type = "hours"), 
+               barmode = 'stack')
     })
     
     filtr_keys <- reactiveVal("all")
