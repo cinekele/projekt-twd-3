@@ -131,10 +131,6 @@ shinyServer(function(input, output) {
         ifelse(filtr_keys() == "Keys", filtr_keys("all"), filtr_keys("Keys"))
     })
     
-    output$mouse_info <- renderPrint({
-      filtr_keys()
-    })
-    
     output$mouse <- renderImage({
             return(list(
                 src = "../img/mouse.png",

@@ -38,7 +38,6 @@ shinyUI(fluidPage(
         column(
             plotlyOutput("application", height = 500),
             plotlyOutput("app_activity"),
-            verbatimTextOutput("mouse_info"),
             width = 6
         )
     )
