@@ -35,8 +35,9 @@ shinyServer(function(input, output) {
         filtered_data() %>%
             filter(name %in%  input$nameButton) %>%
           filter(title %in% order$title) %>%
-            mutate(duration = 60*hours(times(time)) + minutes(times(time)) + 1/60*seconds(times(time))) %>%
-            plot_ly(y = ~title, x = ~duration/60, type = "bar", color = ~name,
+          group_by(title, name) %>%
+          summarise(sum_duration = sum(duration)) %>%
+            plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name,
                     orientation = 'h', source = "application") %>%
                 layout(xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
