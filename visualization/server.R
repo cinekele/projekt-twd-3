@@ -40,7 +40,7 @@ shinyServer(function(input, output) {
                        margin = list(l=350))
         })
     
-    application <- reactiveVal()
+    application <- reactiveVal("chrome")
     
     observeEvent(event_data("plotly_click", source = "application"), {
         application(event_data("plotly_click", source = "application")$y)
