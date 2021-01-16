@@ -111,16 +111,16 @@ shinyServer(function(input, output) {
                                    122.6,156.6, 156.6, 147.6, 138.6,129.6,
                                    88.6,76.6, 66.6, 68.60001))
         if(point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, mwheel$x, mwheel$y) == 1)
-          filtr_keys("Scroll")
+          ifelse(filtr_keys() == "Scroll", filtr_keys("all"), filtr_keys("Scroll"))
         else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, lmb$x, lmb$y) == 1)
-          filtr_keys("LMB")
+          ifelse(filtr_keys() == "LMB", filtr_keys("all"), filtr_keys("LMB"))
         else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, rmb$x, rmb$y) == 1)
-          filtr_keys("RMB")
+          ifelse(filtr_keys() == "RMB", filtr_keys("all"), filtr_keys("RMB"))
     })
     
     observeEvent(input$key_hover, {
       if (!is.null(input$key_hover))
-        filtr_keys("Keys")
+        ifelse(filtr_keys() == "Keys", filtr_keys("all"), filtr_keys("Keys"))
     })
     
     output$mouse_info <- renderPrint({
