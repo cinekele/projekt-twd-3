@@ -8,15 +8,16 @@ shinyUI(fluidPage(
 
     titlePanel("My"),
 
-    sidebarLayout(
-        sidebarPanel(
+    fluidRow(
+        column(
             sliderInput("DatesMerge",
                         "Dates:",
                         min = as.Date("2020-12-20","%Y-%m-%d"),
-                        max = as.Date("2021-01-21","%Y-%m-%d"),
+                        max = as.Date("2021-01-15","%Y-%m-%d"),
                         value=c(as.Date("2020-12-21"), as.Date("2021-01-10")),
                         timeFormat="%Y-%m-%d",
-                        animate = TRUE),
+                        animate = TRUE,
+                        width = 900),
             checkboxGroupButtons(
                 inputId = "nameButton", label = "Osoby :",
                 choices = c("Adam", "Pawel", "Piotr"),
@@ -34,7 +35,7 @@ shinyUI(fluidPage(
 
         ),
 
-        mainPanel(
+        column(
             plotlyOutput("application", height = 500),
             plotlyOutput("app_activity"),
             verbatimTextOutput("mouse_info"),
