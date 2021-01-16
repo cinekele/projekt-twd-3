@@ -62,10 +62,10 @@ shinyServer(function(input, output) {
             ungroup()%>%
             arrange(date)
           
-        color <-  c("Keys" = "blue",
-                    "LMB" = "red",
-                    "RMB" = "green",
-                    "Scroll" = "yellow")
+        color <-  c("Keys" = "#003f5c",
+                    "LMB" = "#7a5195",
+                    "RMB" = "#ef5675",
+                    "Scroll" = "#ffa600")
         
         if (filtr_keys() != "all")
           color <- ifelse(names(color) == filtr_keys(), color, "gray")
