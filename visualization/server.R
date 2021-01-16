@@ -34,7 +34,8 @@ shinyServer(function(input, output) {
             plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name, 
                     colors = person_color,
                     orientation = 'h', source = "application") %>%
-                layout(xaxis = list(title = "Time in hours"),
+                layout(title = list(text = "Applications usage:"), 
+                       xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
                                     categoryorder = "array",
                                     categoryarray = rev(order$title)),
@@ -76,7 +77,7 @@ shinyServer(function(input, output) {
                 add_trace(y = ~lmb, type = "scatter", mode = "markers+lines", color = "LMB") %>%
                 add_trace(y = ~rmb, type = "scatter", mode = "markers+lines", color = "RMB") %>%
                 add_trace(y = ~scrollwheel, type = "scatter", mode = "markers+lines", color = "Scroll") %>%
-                layout(title = list(text = application()), 
+                layout(title = list(text = paste0("Clicks in: \"", application(), "\" over time")), 
                        xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
                        yaxis = list(title = "Number of clicks"))
         else if(nrow(d) == 1)
@@ -88,7 +89,7 @@ shinyServer(function(input, output) {
                 marker = list(
                     color = c('blue','red','green','yellow')
                 )) %>%
-            layout(title = list(text = application()), yaxis = list(title = "Number of clicks"))
+            layout(title = list(text = paste0("Clicks in: \"", application(), "\"")), yaxis = list(title = "Number of clicks"))
         else
             return(NULL)
     })
@@ -104,7 +105,7 @@ shinyServer(function(input, output) {
     
     plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name, 
             colors = person_color) %>% 
-        layout(title = list(text = application()), 
+        layout(title = list(text = paste0("Activity in: \"", application(), "\" over time")), 
                xaxis = list(title = "Date", type = "date", tickformat = "%d/%m<br>(%a)"),
                yaxis = list(title = "Time in hours", type = "hours"), 
                barmode = 'stack',
