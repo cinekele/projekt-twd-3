@@ -4,6 +4,7 @@ library(tidyverse)
 library(plotly)
 library(chron)
 library(ggimage)
+library(sp)
 
 shinyServer(function(input, output) {
     data <- read_csv2("data.csv")
@@ -57,6 +58,7 @@ shinyServer(function(input, output) {
             ungroup()%>%
             arrange(date)
         
+  
         plot_ly(d, x = ~date, colors = c("Keys" = "blue",
                                          "LMB" = "red",
                                          "RMB" = "green",
@@ -86,7 +88,41 @@ shinyServer(function(input, output) {
                    xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
                    yaxis = list(type = "hours"))
     })
-
+    
+    filtr_keys <- reactiveVal("all")
+    
+    observeEvent(input$mouse_hover, {
+        mwheel <- data.frame(x = c(65.95, 84.95, 84.95, 65.95), 
+                                y = c(84.60001, 84.60001, 140.6, 140.6))
+        lmb <- data.frame(x = c(69.95, 38.95, 28.95, 10.95, 5.949997,
+                                   9.949997, 72.95, 72.95, 64.95, 58.95,
+                                   60.95, 72.95, 72.95, 69.95), 
+                             y = c(69.60001, 76.60001, 83.60001, 109.6,125.6,
+                                   153.6, 155.6, 146.6, 143.6, 132.6,
+                                   84.60001, 76.60001, 66.60001, 69.60001))
+        rmb <- data.frame(x = c(78.95, 97.95, 120.95, 133.95,141.95,
+                                   142.95, 141.95, 77.95, 78.95, 89.95,91.95,
+                                   89.95, 77.95, 77.95, 78.95), 
+                             y = c(68.60001, 70.60001, 82.60001, 98.60001,117.6,
+                                   122.6,156.6, 156.6, 147.6, 138.6,129.6,
+                                   88.6,76.6, 66.6, 68.60001))
+        if(point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, mwheel$x, mwheel$y) == 1)
+          filtr_keys("mwhell")
+        else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, lmb$x, lmb$y) == 1)
+          filtr_keys("lmb")
+        else if (point.in.polygon(input$mouse_hover$x, input$mouse_hover$y, rmb$x, rmb$y) == 1)
+          filtr_keys("rmb")
+    })
+    
+    observeEvent(input$key_hover, {
+      if (!is.null(input$key_hover))
+        filtr_keys("key")
+    })
+    
+    output$mouse_info <- renderPrint({
+      filtr_keys()
+    })
+    
     output$mouse <- renderImage({
             return(list(
                 src = "../img/mouse.png",
