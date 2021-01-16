@@ -1148,9 +1148,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.78030336"
-     inkscape:cx="-147.07957"
-     inkscape:cy="816.66018"
+     inkscape:zoom="1.1035156"
+     inkscape:cx="75.003125"
+     inkscape:cy="519.68456"
      inkscape:document-units="mm"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -1177,7 +1177,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1187,24 +1187,24 @@
      id="path4188"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccc"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <path
      sodipodi:nodetypes="cccc"
      inkscape:connector-curvature="0"
      id="rmb"
      d="m 174.39774,169.60412 c 1.06339,-30.50677 -12.02044,-43.57296 -34.43672,-45.13419 l 0.51011,44.17514 z"
-     style="fill:#3dff49;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     style="fill:#ef5675;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <path
-     style="fill:#ff3d3d;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+     style="fill:#7a5195;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
      d="m 106.54452,169.60412 c -1.06339,-30.50677 12.02044,-43.57296 34.43672,-45.13419 l -0.51011,44.17514 z"
      id="lmb"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccc"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <rect
      style="display:inline;opacity:0.99299999;fill:none;fill-opacity:0.97289159;stroke:#010201;stroke-width:4.89499998;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="rect4150"
@@ -1213,31 +1213,31 @@
      x="106.57462"
      y="124.30717"
      ry="33.738213"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <path
      style="display:inline;fill:none;stroke:#000000;stroke-width:4.89499998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 106.54452,169.60412 h 67.73334"
      id="path4154"
      inkscape:connector-curvature="0"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <path
      style="display:inline;fill:none;stroke:#010201;stroke-width:4.89499998;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 140.47113,168.64507 v -51.3095 c 0,-5.22804 1.74139,-8.0321 8.39174,-8.0321 h 21.21912 c 7.47666,0 7.31123,-13.187024 0,-13.187024 h -56.22466"
      id="path4156"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cssssc"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
   <rect
-     style="display:inline;opacity:0.99299999;fill:#f6ff3d;fill-opacity:1;stroke:#000000;stroke-width:4.8947916;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="display:inline;opacity:0.99299999;fill:#ffa600;fill-opacity:1;stroke:#000000;stroke-width:4.8947916;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="scrollwheel"
      width="13.906311"
      height="31.289209"
      x="133.03845"
      y="131.6015"
      ry="6.9531565"
-     inkscape:export-xdpi="53.240112"
-     inkscape:export-ydpi="53.240112" />
+     inkscape:export-xdpi="53.317436"
+     inkscape:export-ydpi="53.317436" />
 </svg>

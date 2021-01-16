@@ -1148,9 +1148,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1035156"
-     inkscape:cx="102.52869"
-     inkscape:cy="1029.5991"
+     inkscape:zoom="3.1212135"
+     inkscape:cx="364.19901"
+     inkscape:cy="911.18562"
      inkscape:document-units="mm"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -1177,7 +1177,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1203,16 +1203,16 @@
      inkscape:export-ydpi="99.392128" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:33.84449387px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#1400e5;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1"
-     x="102.89117"
-     y="47.949467"
+     style="font-style:normal;font-weight:normal;font-size:37.34509659px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#003f5c;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1;"
+     x="101.68874"
+     y="49.223873"
      id="text4210"
-     transform="scale(1.0002463,0.99975375)"
+     transform="scale(1.0002982,0.99970188)"
      inkscape:export-xdpi="99.392128"
      inkscape:export-ydpi="99.392128"><tspan
        sodipodi:role="line"
        id="tspan4208"
-       x="102.89117"
-       y="47.949467"
-       style="fill:#1400e5;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1">A</tspan></text>
+       x="101.68874"
+       y="49.223873"
+       style="fill:#003f5c;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1;">A</tspan></text>
 </svg>
