@@ -20,9 +20,9 @@ shinyUI(fluidPage(
                         width = 900),
             checkboxGroupButtons(
                 inputId = "nameButton", label = "Osoby :",
-                choiceNames = c(HTML("<p style=\"color:black;font-size:20px;background-color:blue\">Adam</p>"),
-                                HTML("<p style=\"color:black;font-size:20px;background-color:brown\">Paweł</p>"),
-                                HTML("<p style=\"color:black;font-size:20px;background-color:green\">Piotr</p>")),
+                choiceNames = c(HTML("<p style=\"color:black;font-size:20px;background-color:#E69F00\">Adam</p>"),
+                                HTML("<p style=\"color:black;font-size:20px;background-color:#009E73\">Paweł</p>"),
+                                HTML("<p style=\"color:black;font-size:20px;background-color:#56B4E9\">Piotr</p>")),
                 choiceValues = c("Adam", "Pawel", "Piotr"),
                 justified = TRUE, status = "primary",
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),

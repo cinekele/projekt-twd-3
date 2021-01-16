@@ -8,6 +8,7 @@ library(sp)
 
 shinyServer(function(input, output) {
     data <- read_csv2("data.csv")
+    person_color <- c("Adam" = "#E69F00", "Pawel" = "#009E73", "Piotr" = "#56B4E9")
     
     filtered_data <- reactive({
         data %>% 
@@ -31,7 +32,7 @@ shinyServer(function(input, output) {
           group_by(title, name) %>%
           summarise(sum_duration = sum(duration)) %>%
             plot_ly(y = ~title, x = ~sum_duration/60, type = "bar", color = ~name, 
-                    colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen"),
+                    colors = person_color,
                     orientation = 'h', source = "application") %>%
                 layout(xaxis = list(title = "Time in hours"),
                        yaxis = list(title = list(text = "Application", standoff = 0), 
@@ -97,7 +98,7 @@ shinyServer(function(input, output) {
             arrange(date)
     
     plot_ly(d, x = ~date, y = ~duration, type = 'bar', color = ~name, 
-            colors = c("Adam" = "blue", "Pawel" = "brown", "Piotr" = "forestgreen")) %>% 
+            colors = person_color) %>% 
         layout(title = list(text = application()), 
                xaxis = list(type = "date", tickformat = "%d %b (%a)<br>%Y"),
                yaxis = list(type = "hours"), 
